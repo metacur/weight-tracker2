@@ -1,0 +1,27 @@
+body {
+  font-family: sans-serif;
+  max-width: 600px;
+  margin: 30px auto;
+  background: #f0f0f0;
+  padding: 20px;
+}
+h1 {
+  text-align: center;
+}
+form, table {
+  margin-top: 20px;
+}
+input, button {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}

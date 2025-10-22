@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>体重管理システム ver 2</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <h1>体重管理</h1>
+  <form method="POST">
+    <label>日付:</label>
+    <input type="date" name="date" required>
+    <label>体重 (kg):</label>
+    <input type="number" name="weight" step="0.1" required>
+    <button type="submit">記録</button>
+  </form>
+
+  <table>
+    <tr><th>日付</th><th>体重</th><th>操作</th></tr>
+    {% for entry in weights %}
+    <tr>
+      <td>{{ entry['date'] }}</td>
+      <td>{{ entry['weight'] }}</td>
+      <td><a href="/delete/{{ entry['id'] }}">削除</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <canvas id="weightChart" width="400" height="200"></canvas>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- 外部JSファイル -->
+  <script src="/static/chart.js"></script>
+  <!-- データをJSに渡す -->
+  <script>
+    const weightData = {{ weights|tojson }};
+    renderChart(weightData);
+  </script>
+</body>
+</html>
