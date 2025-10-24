@@ -1,7 +1,8 @@
 # Overview
-体重を記録しグラフ化するWEBシステム（ver 2）です
+体重を記録しグラフ化するWEBシステム（ver 2）です<br />
 Python + SQLite + Flask + Chart.js
 
+<br />
 
 ■実行方法
 - PythonとFlaskをインストール：
@@ -11,5 +12,6 @@ Python + SQLite + Flask + Chart.js
 　python app.py
 
 - ブラウザで http://localhost:5000 にアクセス
+
 
 
