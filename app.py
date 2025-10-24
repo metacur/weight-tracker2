@@ -8,7 +8,6 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
-@app.before_first_request
 def create_table():
     conn = get_db_connection()
     conn.execute('''
@@ -21,6 +20,10 @@ def create_table():
     conn.commit()
     conn.close()
 
+create_table()  # ← ここで明示的に呼び出す
+
+
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     conn = get_db_connection()
@@ -29,8 +32,12 @@ def index():
         weight = request.form['weight']
         conn.execute('INSERT INTO weights (date, weight) VALUES (?, ?)', (date, weight))
         conn.commit()
-    weights = conn.execute('SELECT * FROM weights ORDER BY date').fetchall()
+    rows = conn.execute('SELECT * FROM weights ORDER BY date').fetchall()
     conn.close()
+
+    # Rowオブジェクトを辞書に変換
+    weights = [dict(row) for row in rows]
+
     return render_template('index.html', weights=weights)
 
 @app.route('/delete/<int:id>')
